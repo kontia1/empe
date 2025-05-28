@@ -44,7 +44,7 @@ const gasRedelegate = "350000";
 
 // Helper: validator logic
 function getValidators() {
-  return fs.readFileSync("validator.txt", "utf-8")
+  return fs.readFileSync("val.txt", "utf-8")
     .split("\n").map(line => line.trim()).filter(Boolean);
 }
 function getRandomValidator(validators, except = []) {
