@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@cosmjs/proto-signing": "^0.28.1",
+    "@cosmjs/stargate": "^0.28.1",
+    "@cosmjs/tendermint-rpc": "^0.28.1"
+  }
+}
