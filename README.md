@@ -1,7 +1,11 @@
 # EMPERIA Testnet
 
 link Testnet
+
 https://hub.empe.io/
+
+Wallet
+Keplr
 
 ## 📥 Installation
 
