@@ -20,7 +20,7 @@ function randSendCount() {
   return Math.floor(Math.random() * 4) + 3; // 3-6
 }
 function randDelegateCount() {
-  return Math.floor(Math.random() * 4) + 3; // 3-6
+  return Math.floor(Math.random() * 3) + 3; // 3-6
 }
 function randUndelegateCount() {
   return Math.floor(Math.random() * 2) + 1; // 1-2
@@ -30,17 +30,17 @@ function randRedelegateCount() {
 }
 
 // RANGE NOMINAL (DALAM uempe)
-const amountsend = { min: 100, max: 1000 };              // 0.0001~0.001 EMPE
+const amountsend = { min: 100, max: 700 };              // 0.0001~0.001 EMPE
 const amountdelegate = { min: 3000, max: 5000 };         // 0.003~0.005 EMPE
-const amountundelegate = { min: 100, max: 300 };         // 0.0001~0.0003 EMPE
-const amountredelegate = { min: 100, max: 300 };         // 0.0001~0.0003 EMPE
+const amountundelegate = { min: 250, max: 550 };         // 0.0001~0.0003 EMPE
+const amountredelegate = { min: 150, max: 400 };         // 0.0001~0.0003 EMPE
 
 // Gas limits
 const gasSend = "80000";
-const gasDelegate = "160000";
-const gasWithdraw = "130000";
-const gasUndelegate = "240000";
-const gasRedelegate = "350000";
+const gasDelegate = "170000";
+const gasWithdraw = "150000";
+const gasUndelegate = "250000";
+const gasRedelegate = "360000";
 
 // Helper: validator logic
 function getValidators() {
