@@ -26,7 +26,7 @@ Add your Mnemonic (one per line).
 ```
 node main.js
 ```
-5️⃣ optional
+5️⃣ Optional
 
 Add more Validator address
 ```
