@@ -1,5 +1,8 @@
 # EMPERIA Testnet
 
+link Testnet
+https://hub.empe.io/
+
 ## 📥 Installation
 
 1️⃣ **Clone the Repository**  
