@@ -26,3 +26,9 @@ Add your Mnemonic (one per line).
 ```
 node main.js
 ```
+5️⃣ optional
+
+Add more Validator address
+```
+nano val.txt
+```
