@@ -21,8 +21,8 @@ const redelegate = 2; // Jumlah redelegate per wallet
 
 // === RANGE NOMINAL (DALAM uempe) BISA DIATUR DI SINI ===
 const amountdelegate = { min: 3000, max: 5000 };     // 0.003 - 0.005 EMPE
-const amountundelegate = { min: 300, max: 500 };     // 0.0001 - 0.0003 EMPE
-const amountredelegate = { min: 300, max: 500 };     // 0.0001 - 0.0003 EMPE
+const amountundelegate = { min: 100, max: 300 };     // 0.0001 - 0.0003 EMPE
+const amountredelegate = { min: 100, max: 300 };     // 0.0001 - 0.0003 EMPE
 
 // Gas limits
 const gasDelegate = "160000";
@@ -31,7 +31,7 @@ const gasUndelegate = "240000";
 const gasRedelegate = "350000";
 
 function getValidators() {
-  return fs.readFileSync("val.txt", "utf-8")
+  return fs.readFileSync("validator.txt", "utf-8")
     .split("\n").map(line => line.trim()).filter(Boolean);
 }
 function getRandomValidator(validators, except = []) {
@@ -41,6 +41,20 @@ function getRandomValidator(validators, except = []) {
 }
 function randomAmount(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Check for in-progress redelegation between srcVal and dstVal
+async function isRedelegationInProgress(queryClient, delegator, srcVal, dstVal) {
+  try {
+    const redelegations = await queryClient.staking.redelegations(delegator, srcVal, dstVal);
+    return (
+      redelegations &&
+      redelegations.redelegationResponses &&
+      redelegations.redelegationResponses.length > 0
+    );
+  } catch {
+    return false; // Jika error, anggap tidak ada yg pending daripada stuck
+  }
 }
 
 async function processWallets() {
@@ -138,6 +152,12 @@ async function processWallets() {
           dstVal = getRandomValidator(validators, [srcVal, ...delegatedValidators]);
         } catch {
           console.log(`Redelegate Failed (no available dst validator for ${srcVal})`);
+          continue;
+        }
+        // Cek jika ada redelegasi in-progress antara srcVal dan dstVal
+        const inProgress = await isRedelegationInProgress(queryClient, account.address, srcVal, dstVal);
+        if (inProgress) {
+          console.log(`Skip redelegate: redelegation from ${srcVal} to ${dstVal} is still in progress`);
           continue;
         }
         try {
