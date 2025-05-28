@@ -21,8 +21,8 @@ const redelegate = 2; // Jumlah redelegate per wallet
 
 // === RANGE NOMINAL (DALAM uempe) BISA DIATUR DI SINI ===
 const amountdelegate = { min: 3000, max: 5000 };     // 0.003 - 0.005 EMPE
-const amountundelegate = { min: 100, max: 300 };     // 0.0001 - 0.0003 EMPE
-const amountredelegate = { min: 100, max: 300 };     // 0.0001 - 0.0003 EMPE
+const amountundelegate = { min: 300, max: 500 };     // 0.0001 - 0.0003 EMPE
+const amountredelegate = { min: 300, max: 500 };     // 0.0001 - 0.0003 EMPE
 
 // Gas limits
 const gasDelegate = "160000";
@@ -31,7 +31,7 @@ const gasUndelegate = "240000";
 const gasRedelegate = "350000";
 
 function getValidators() {
-  return fs.readFileSync("validator.txt", "utf-8")
+  return fs.readFileSync("val.txt", "utf-8")
     .split("\n").map(line => line.trim()).filter(Boolean);
 }
 function getRandomValidator(validators, except = []) {
